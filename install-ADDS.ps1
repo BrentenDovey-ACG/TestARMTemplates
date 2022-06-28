@@ -2,9 +2,13 @@
 # Windows PowerShell script for AD DS Deployment
 #
 
-Install-WindowsFeature "AD-Domain-Services" -IncludeManagementTools
+$ProgressPreference = "SilentlyContinue"
+$WarningPreference = "SilentlyContinue"
+Install-WindowsFeature "AD-Domain-Services" -IncludeManagementTools | Out-Null
+$pw = $adminCreds.userPassword
 Import-Module ADDSDeployment
 Install-ADDSForest `
+-SafeModeAdministratorPassword $pw `
 -CreateDnsDelegation:$false `
 -DatabasePath "C:\Windows\NTDS" `
 -DomainMode "WinThreshold" `
