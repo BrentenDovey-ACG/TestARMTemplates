@@ -5,7 +5,8 @@
 $ProgressPreference = "SilentlyContinue"
 $WarningPreference = "SilentlyContinue"
 Install-WindowsFeature "AD-Domain-Services" -IncludeManagementTools | Out-Null
-$pw = ConvertTo-SecureString "p@55w0rd" -AsPlainText -Force
+# $pw = ConvertTo-SecureString "p@55w0rd" -AsPlainText -Force
+$pw = $(Items.adminPassword)
 Import-Module ADDSDeployment
 Install-ADDSForest `
 -SafeModeAdministratorPassword $pw `
